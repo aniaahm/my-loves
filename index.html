@@ -311,7 +311,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-archive-muted mb-1">Admin Password:</label>
-                    <input type="password" id="adminPasswordInput" placeholder="Enter password (default: 1234)" class="input-scrapbook text-sm">
+                    <input type="password" id="pondphuwinismylife" placeholder="Enter password (default: 2003)" class="input-scrapbook text-sm">
                 </div>
                 <button onclick="verifyAdminPassword()" class="w-full bg-archive-sage hover:bg-[#77965c] text-white py-2.5 rounded-xl font-medium text-sm transition shadow-sm">
                     Unlock Archive
@@ -674,8 +674,8 @@
         }
 
         function verifyAdminPassword() {
-            const pwd = document.getElementById('adminPasswordInput').value;
-            const correctPwd = localStorage.getItem('archive_admin_pwd') || '1234';
+            const pwd = document.getElementById('pondphuwinismylife').value;
+            const correctPwd = localStorage.getItem('archive_admin_pwd') || '2003';
 
             if (pwd === correctPwd) {
                 closeAdminLoginModal();
@@ -687,14 +687,14 @@
                 renderSubmissionsList();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                alertBox("Incorrect password. Default PIN is 1234.");
+                alertBox("Incorrect password. Default PIN is 2003.");
             }
         }
 
         function logoutAdmin() {
             document.getElementById('adminDashboardView').classList.add('hidden');
             document.getElementById('landingView').classList.remove('hidden');
-            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('pondphuwinismylife').value = '';
         }
 
         function toggleCloudConfig() {
