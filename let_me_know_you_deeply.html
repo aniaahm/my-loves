@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LET ME KNOW YOU — DEEPLY ♡</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Instrument Serif & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        archive: {
+                            bg: '#fbf9f5',
+                            card: '#ffffff',
+                            pink: '#f4c2c2',
+                            rose: '#fbe8e7',
+                            sage: '#87a96b',
+                            matcha: '#9fb896',
+                            cream: '#f5f0eb',
+                            text: '#4a4543',
+                            muted: '#7a726e',
+                            border: '#e8dfd8',
+                            accent: '#d4a373'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Instrument Serif"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #fbf9f5;
+            color: #4a4543;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: radial-gradient(#e8dfd8 1px, transparent 1px);
+            background-size: 28px 28px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Instrument Serif', serif;
+            letter-spacing: 0.02em;
+        }
+
+        /* Floating background elements */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .float-element {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+        .float-element-delayed {
+            animation: floatSlow 8s ease-in-out infinite 2s;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f0eb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9fb896;
+            border-radius: 4px;
+        }
+
+        .paper-card {
+            background: #ffffff;
+            border: 1px solid #e8dfd8;
+            box-shadow: 0 10px 30px -10px rgba(135, 169, 107, 0.08);
+            border-radius: 1.5rem;
+        }
+
+        .input-scrapbook {
+            background-color: #fbf9f5;
+            border: 1px solid #e8dfd8;
+            border-radius: 0.85rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+        .input-scrapbook:focus {
+            outline: none;
+            border-color: #87a96b;
+            box-shadow: 0 0 0 3px rgba(135, 169, 107, 0.15);
+            background-color: #fff;
+        }
+
+        .tab-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-archive-pink/40">
+
+    <!-- Decorative Floating Elements -->
+    <div class="fixed top-10 left-10 text-archive-sage/40 text-2xl float-element pointer-events-none select-none">✨</div>
+    <div class="fixed top-24 right-16 text-archive-pink/60 text-3xl float-element-delayed pointer-events-none select-none">♡</div>
+    <div class="fixed bottom-12 left-16 text-archive-accent/40 text-2xl float-element pointer-events-none select-none">🌸</div>
+    <div class="fixed bottom-20 right-12 text-archive-sage/50 text-2xl float-element pointer-events-none select-none">⭐</div>
+
+    <!-- Top Navigation / Admin Trigger Bar -->
+    <header class="w-full py-4 px-6 flex justify-between items-center max-w-5xl mx-auto z-20">
+        <div class="flex items-center space-x-2">
+            <span class="inline-block w-3 h-3 rounded-full bg-archive-sage"></span>
+            <span class="text-xs uppercase tracking-widest font-semibold text-archive-muted">Private Archive</span>
+        </div>
+        <button onclick="openAdminLoginModal()" class="text-xs font-medium text-archive-muted hover:text-archive-sage transition bg-white/80 border border-archive-border px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+            <span>🔒</span> Owner / Admin View
+        </button>
+    </header>
+
+    <!-- Main Container App -->
+    <main class="flex-grow flex items-center justify-center px-4 py-6 max-w-3xl w-full mx-auto z-10">
+
+        <!-- ================= LANDING PAGE ================= -->
+        <div id="landingView" class="w-full paper-card p-8 md:p-14 text-center fade-in relative overflow-hidden">
+            <!-- Decorative bow SVG -->
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-archive-rose rounded-full opacity-50 blur-xl pointer-events-none"></div>
+            <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-archive-sage/20 rounded-full opacity-50 blur-xl pointer-events-none"></div>
+
+            <div class="inline-flex items-center gap-2 bg-archive-rose text-archive-text px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-6 border border-archive-pink/60">
+                <span>🎀</span> this is for people who are loved & valued by me.
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-serif text-archive-text mb-4 leading-none">
+                LET ME KNOW YOU <br>
+                <span class="text-archive-sage italic">DEEPLY ♡</span>
+            </h1>
+
+            <p class="text-lg md:text-xl font-serif italic text-archive-muted max-w-lg mx-auto mb-6">
+                “a little place for the people I love to tell me the things I might not know yet.”
+            </p>
+
+            <div class="bg-archive-cream/60 border border-archive-border rounded-2xl p-5 mb-8 max-w-lg mx-auto text-left text-sm text-archive-text leading-relaxed">
+                <p class="font-medium text-archive-sage mb-1 flex items-center gap-1.5"><span>💌</span> Quick note before you begin:</p>
+                “This isn't a test, and you don't have to answer everything. Take your time. Skip anything you don't feel like answering. I just want to know you a little more.”
+            </div>
+
+            <button onclick="startQuestionnaire()" class="bg-archive-sage hover:bg-[#77965c] text-white font-medium px-8 py-4 rounded-full text-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 mx-auto">
+                <span>enter my little archive ♡</span>
+            </button>
+        </div>
+
+
+        <!-- ================= QUESTIONNAIRE VIEW ================= -->
+        <div id="questionnaireView" class="w-full hidden fade-in">
+            <!-- Progress & Header -->
+            <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white/90 border border-archive-border px-6 py-4 rounded-2xl shadow-sm">
+                <div>
+                    <span id="sectionIndicator" class="text-xs font-bold tracking-widest text-archive-sage uppercase">SECTION 01 OF 08</span>
+                    <h2 id="sectionTitle" class="text-2xl md:text-3xl font-serif text-archive-text">THE BASICS ♡</h2>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+                    <div class="text-xs font-semibold bg-archive-cream px-3 py-1 rounded-full text-archive-muted border border-archive-border">
+                        Progress: <span id="progressText">01 / 08</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questionnaire Card Form -->
+            <div class="paper-card p-6 md:p-10 mb-6">
+                <form id="questionnaireForm" onsubmit="event.preventDefault();">
+                    <!-- Dynamic Section Content will be injected here -->
+                    <div id="sectionContainer" class="space-y-6"></div>
+                </form>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center pb-8">
+                <button id="prevBtn" onclick="prevSection()" class="bg-white border border-archive-border hover:bg-archive-cream text-archive-text px-6 py-3 rounded-full font-medium text-sm transition shadow-sm flex items-center gap-2">
+                    <span>←</span> Previous
+                </button>
+                <div class="text-xs text-archive-muted italic hidden sm:block" id="encouragingTip">
+                    Take your time, you're doing wonderfully ♡
+                </div>
+                <button id="nextBtn" onclick="nextSection()" class="bg-archive-sage hover:bg-[#77965c] text-white px-8 py-3 rounded-full font-medium text-sm transition shadow-md flex items-center gap-2">
+                    Next Section <span>→</span>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- ================= SUCCESS CONFIRMATION VIEW ================= -->
+        <div id="successView" class="w-full paper-card p-8 md:p-14 text-center hidden fade-in relative">
+            <div class="w-20 h-20 bg-archive-rose rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-inner">
+                💌
+            </div>
+            <div class="inline-block bg-archive-sage/10 text-archive-sage border border-archive-sage/30 px-4 py-1 rounded-full text-xs font-semibold mb-4">
+                you've been officially archived ♡
+            </div>
+            <h2 class="text-4xl md:text-5xl font-serif text-archive-text mb-4">
+                Thank you for letting me know you a little more deeply.
+            </h2>
+            <p class="text-archive-muted font-serif italic text-lg mb-6 max-w-md mx-auto">
+                “Every little answer is another tiny piece of your story, and I'm really glad you trusted me with it.”
+            </p>
+            <div class="bg-archive-cream/70 border border-archive-border p-4 rounded-2xl max-w-sm mx-auto text-xs text-archive-muted mb-8">
+                🔒 Your answers have been securely saved and are only accessible through my private archive view.
+            </div>
+            <button onclick="location.reload()" class="bg-archive-sage hover:bg-[#77965c] text-white px-6 py-3 rounded-full text-sm font-medium transition shadow-sm">
+                Return Home ♡
+            </button>
+        </div>
+
+
+        <!-- ================= ADMIN DASHBOARD VIEW ================= -->
+        <div id="adminDashboardView" class="w-full hidden fade-in">
+            <div class="bg-white border border-archive-border rounded-3xl p-6 md:p-8 shadow-sm mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-6 border-b border-archive-border">
+                    <div>
+                        <div class="inline-flex items-center gap-1.5 bg-archive-sage/10 text-archive-sage px-3 py-1 rounded-full text-xs font-semibold mb-2">
+                            <span>🔒</span> Private Owner View
+                        </div>
+                        <h2 class="text-3xl font-serif text-archive-text">Your Responses Archive</h2>
+                        <p class="text-xs text-archive-muted">Manage and read private submissions from the people you love.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="exportJSON()" class="bg-white border border-archive-border hover:bg-archive-cream text-archive-text text-xs px-4 py-2.5 rounded-full font-medium transition shadow-sm flex items-center gap-1">
+                            <span>📥</span> Export JSON
+                        </button>
+                        <button onclick="logoutAdmin()" class="bg-archive-rose/60 hover:bg-archive-rose text-archive-text text-xs px-4 py-2.5 rounded-full font-medium transition">
+                            Lock Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cloud Sync Config Banner -->
+                <div class="bg-archive-cream/80 border border-archive-border rounded-2xl p-4 mb-6 text-xs text-archive-text">
+                    <div class="flex justify-between items-center mb-1 font-semibold text-archive-sage">
+                        <span class="flex items-center gap-1"><span>☁️</span> Cloud Sync Configuration (JSONBin.io)</span>
+                        <button onclick="toggleCloudConfig()" class="text-archive-muted underline hover:text-archive-text">Configure</button>
+                    </div>
+                    <p class="text-archive-muted mb-2">To receive submissions from friends across different devices on GitHub Pages, connect a free JSONBin.io Master Key and Bin ID.</p>
+                    <div id="cloudConfigPanel" class="hidden mt-3 pt-3 border-t border-archive-border space-y-2">
+                        <div>
+                            <label class="block font-medium mb-1">JSONBin Master Key (X-Master-Key):</label>
+                            <input type="password" id="jsonbinKeyInput" placeholder="e.g. $2a$10$..." class="input-scrapbook text-xs py-1.5">
+                        </div>
+                        <div>
+                            <label class="block font-medium mb-1">JSONBin Bin ID:</label>
+                            <input type="text" id="jsonbinIdInput" placeholder="e.g. 648123abc..." class="input-scrapbook text-xs py-1.5">
+                        </div>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="saveCloudConfig()" class="bg-archive-sage text-white px-4 py-1.5 rounded-lg text-xs font-medium">Save & Test Sync</button>
+                            <button onclick="syncFromCloud()" class="bg-white border border-archive-border px-4 py-1.5 rounded-lg text-xs font-medium">Fetch Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search & Stats Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+                    <div class="text-sm font-medium text-archive-text">
+                        Total Submissions: <span id="totalSubmissionsCount" class="bg-archive-sage text-white px-2.5 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div class="w-full sm:w-64">
+                        <input type="text" id="searchInput" oninput="renderSubmissionsList()" placeholder="Search by name or nickname..." class="input-scrapbook text-xs py-2">
+                    </div>
+                </div>
+
+                <!-- Submissions List -->
+                <div id="submissionsListContainer" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+            
+            <div class="text-center pb-8">
+                <button onclick="location.reload()" class="text-xs text-archive-muted underline hover:text-archive-text">← Exit to Public Landing Page</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="paper-card p-6 md:p-8 max-w-sm w-full relative fade-in">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-archive-muted hover:text-archive-text text-sm font-bold">✕</button>
+            <div class="text-center mb-6">
+                <div class="text-2xl mb-1">🔒</div>
+                <h3 class="text-2xl font-serif text-archive-text">Owner Access</h3>
+                <p class="text-xs text-archive-muted">Enter your private PIN or password to view responses.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-archive-muted mb-1">Admin Password:</label>
+                    <input type="password" id="adminPasswordInput" placeholder="Enter password (default: 1234)" class="input-scrapbook text-sm">
+                </div>
+                <button onclick="verifyAdminPassword()" class="w-full bg-archive-sage hover:bg-[#77965c] text-white py-2.5 rounded-xl font-medium text-sm transition shadow-sm">
+                    Unlock Archive
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESPONSE DETAILS MODAL -->
+    <div id="responseModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="paper-card p-6 md:p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto relative fade-in">
+            <button onclick="closeResponseModal()" class="absolute top-4 right-4 text-archive-muted hover:text-archive-text text-lg font-bold">✕</button>
+            <div id="responseModalContent">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 text-center text-xs text-archive-muted z-10">
+        <p>LET ME KNOW YOU — DEEPLY ♡ crafted with love & warmth.</p>
+    </footer>
+
+    <script>
+        // Questionnaire Data Structure with 8 comprehensive sections
+        const questionnaireSections = [
+            {
+                id: 1,
+                title: "SECTION 01 — THE BASICS ♡",
+                subtitle: "Let's start with the foundational things.",
+                questions: [
+                    { id: "name", label: "What should I call you?", type: "text", required: true, placeholder: "Your preferred name..." },
+                    { id: "fullName", label: "Full name (optional)", type: "text", required: false, placeholder: "Your full name..." },
+                    { id: "nicknames", label: "Nickname(s)", type: "text", required: false, placeholder: "Any cute nicknames?" },
+                    { id: "birthday", label: "Birthday", type: "text", required: false, placeholder: "Month & Day (e.g. Oct 12)" },
+                    { id: "age", label: "Age (optional)", type: "text", required: false, placeholder: "Your age..." },
+                    { id: "from", label: "Where are you from?", type: "text", required: false, placeholder: "City / Country..." },
+                    { id: "doing", label: "What are you currently studying / doing?", type: "text", required: false, placeholder: "Student, designer, creator..." },
+                    { id: "futureGoals", label: "What do you want to do in the future?", type: "textarea", required: false, placeholder: "Your dreams or aspirations..." },
+                    { id: "mbti", label: "What's your MBTI? (optional)", type: "text", required: false, placeholder: "e.g. INFJ, ENFP..." },
+                    { id: "zodiac", label: "What's your zodiac sign? (optional)", type: "text", required: false, placeholder: "e.g. Scorpio, Taurus..." },
+                    { id: "loveLanguage", label: "What's your love language?", type: "text", required: false, placeholder: "Quality time, words of affirmation..." },
+                    { id: "selfDescription", label: "How would you describe yourself in a few words?", type: "textarea", required: false, placeholder: "Quietly observant, warm, curious..." }
+                ]
+            },
+            {
+                id: 2,
+                title: "SECTION 02 — FAVORITE EVERYTHING 🎀",
+                subtitle: "The fun and comprehensive favorites list.",
+                questions: [
+                    { id: "favColor", label: "Favorite color", type: "text", placeholder: "e.g. Sage green, baby pink..." },
+                    { id: "favFood", label: "Favorite food", type: "text", placeholder: "e.g. Sushi, pasta..." },
+                    { id: "favSnack", label: "Favorite snack", type: "text", placeholder: "e.g. Truffle chips, gummies..." },
+                    { id: "favDrink", label: "Favorite drink", type: "text", placeholder: "e.g. Matcha latte, iced americano..." },
+                    { id: "favFruit", label: "Favorite fruit", type: "text", placeholder: "e.g. Strawberries, mango..." },
+                    { id: "favDessert", label: "Favorite dessert", type: "text", placeholder: "e.g. Basque cheesecake..." },
+                    { id: "favCandy", label: "Favorite candy", type: "text", placeholder: "e.g. Sour patch kids..." },
+                    { id: "favIceCream", label: "Favorite ice cream flavor", type: "text", placeholder: "e.g. Mint choc chip, pistachio..." },
+                    { id: "favFastFood", label: "Favorite fast food", type: "text", placeholder: "e.g. Shake Shack, McDonald's..." },
+                    { id: "favCuisine", label: "Favorite cuisine", type: "text", placeholder: "e.g. Japanese, Thai, Italian..." },
+                    { id: "favRestaurant", label: "Favorite restaurant / place to eat", type: "text", placeholder: "Name of spot..." },
+                    { id: "favSeason", label: "Favorite season", type: "text", placeholder: "e.g. Autumn, Spring..." },
+                    { id: "favWeather", label: "Favorite weather", type: "text", placeholder: "e.g. Rainy & overcast, sunny breeze..." },
+                    { id: "favFlower", label: "Favorite flower", type: "text", placeholder: "e.g. Peonies, daisies..." },
+                    { id: "favAnimal", label: "Favorite animal", type: "text", placeholder: "e.g. Cats, capybaras..." },
+                    { id: "favPlace", label: "Favorite place", type: "text", placeholder: "A cozy cafe, my room..." },
+                    { id: "favCountry", label: "Favorite country", type: "text", placeholder: "e.g. Japan, Switzerland..." },
+                    { id: "favCity", label: "Favorite city", type: "text", placeholder: "e.g. Kyoto, London..." },
+                    { id: "favClothing", label: "Favorite clothing item", type: "text", placeholder: "e.g. Oversized hoodie, silver rings..." },
+                    { id: "favAesthetic", label: "Favorite aesthetic", type: "text", placeholder: "e.g. Coquette, minimalist, cottagecore..." },
+                    { id: "favSmell", label: "Favorite smell", type: "text", placeholder: "e.g. Rain on pavement, vanilla, matcha..." },
+                    { id: "favEmoji", label: "Favorite emoji", type: "text", placeholder: "e.g. 🤍, ☁️, 🥹..." },
+                    { id: "favNumber", label: "Favorite number", type: "text", placeholder: "e.g. 7, 11, 23..." },
+                    { id: "favWord", label: "Favorite word", type: "text", placeholder: "e.g. Serendipity, solace..." },
+                    { id: "favSubject", label: "Favorite subject", type: "text", placeholder: "e.g. Psychology, art..." },
+                    { id: "favHobby", label: "Favorite hobby", type: "text", placeholder: "e.g. Journaling, baking..." },
+                    { id: "favApp", label: "Favorite app", type: "text", placeholder: "e.g. Pinterest, Spotify..." },
+                    { id: "favGame", label: "Favorite game", type: "text", placeholder: "e.g. Stardew Valley, Zelda..." },
+                    { id: "favMovie", label: "Favorite movie", type: "text", placeholder: "e.g. Studio Ghibli films..." },
+                    { id: "favTvShow", label: "Favorite TV show", type: "text", placeholder: "e.g. Succession, Gilmore Girls..." },
+                    { id: "favDrama", label: "Favorite drama", type: "text", placeholder: "C-drama / K-drama..." },
+                    { id: "favAnime", label: "Favorite anime", type: "text", placeholder: "e.g. Jujutsu Kaisen, Nana..." },
+                    { id: "favBook", label: "Favorite book", type: "text", placeholder: "Book title..." },
+                    { id: "favCharacter", label: "Favorite fictional character", type: "text", placeholder: "Character name..." },
+                    { id: "favActor", label: "Favorite actor", type: "text", placeholder: "Actor name..." },
+                    { id: "favActress", label: "Favorite actress", type: "text", placeholder: "Actress name..." },
+                    { id: "favIdol", label: "Favorite idol", type: "text", placeholder: "Idol name..." },
+                    { id: "favMusicGroup", label: "Favorite K-pop / T-pop group", type: "text", placeholder: "Group name..." },
+                    { id: "favSong", label: "Favorite song", type: "text", placeholder: "Song title & artist..." },
+                    { id: "favAlbum", label: "Favorite album", type: "text", placeholder: "Album name..." },
+                    { id: "favArtist", label: "Favorite artist", type: "text", placeholder: "Music artist..." },
+                    { id: "favMusicGenre", label: "Favorite music genre", type: "text", placeholder: "e.g. Indie pop, R&B..." },
+                    { id: "favCreator", label: "Favorite YouTuber / creator", type: "text", placeholder: "Creator name..." }
+                ]
+            },
+            {
+                id: 3,
+                title: "SECTION 03 — YOUR CURRENT LORE 🎧",
+                subtitle: "A snapshot of your life right at this very moment.",
+                questions: [
+                    { id: "currSong", label: "What's your current favorite song?", type: "text", placeholder: "On repeat right now..." },
+                    { id: "currObsession", label: "What's your current obsession?", type: "text", placeholder: "A food, hobby, or topic..." },
+                    { id: "currComfortShow", label: "What's your current comfort show/movie?", type: "text", placeholder: "What you put on when relaxing..." },
+                    { id: "currWhoObsessed", label: "Who are you currently obsessed with?", type: "text", placeholder: "Artist, character, or person..." },
+                    { id: "currHyperfixation", label: "What are you hyperfixated on right now?", type: "text", placeholder: "Your latest rabbit hole..." },
+                    { id: "currMakingHappy", label: "What's currently making you happy?", type: "text", placeholder: "Little daily joys..." },
+                    { id: "currSavingUp", label: "What are you currently saving up for?", type: "text", placeholder: "A trip, gadget, concert ticket..." },
+                    { id: "currWishlist", label: "What's on your current wishlist?", type: "text", placeholder: "Items you've been eyeing..." },
+                    { id: "currWatching", label: "What are you currently watching?", type: "text", placeholder: "Show or anime in progress..." },
+                    { id: "currListening", label: "What are you currently listening to?", type: "text", placeholder: "Podcast or album..." },
+                    { id: "currReading", label: "What are you currently reading?", type: "text", placeholder: "Book or article..." },
+                    { id: "currExcited", label: "What's something you're excited about right now?", type: "text", placeholder: "Upcoming plans or events..." }
+                ]
+            },
+            {
+                id: 4,
+                title: "SECTION 04 — THE LITTLE THINGS 🧸",
+                subtitle: "Quirks, habits, and everyday details.",
+                questions: [
+                    { id: "goToOrder", label: "What's your go-to order?", type: "text", placeholder: "At your favorite cafe..." },
+                    { id: "comfortFood", label: "What's your comfort food?", type: "text", placeholder: "When you need a warm hug in food form..." },
+                    { id: "eatForever", label: "What's something you could eat forever?", type: "text", placeholder: "One food item for the rest of time..." },
+                    { id: "mostUsedEmoji", label: "What's your most-used emoji?", type: "text", placeholder: "Check your recent keyboard..." },
+                    { id: "mostUsedPhrase", label: "What's your most-used phrase?", type: "text", placeholder: "Slang or catchphrase you say a lot..." },
+                    { id: "weirdHabit", label: "What's your weirdest habit?", type: "text", placeholder: "No judgment here..." },
+                    { id: "biggestPetPeeve", label: "What's biggest pet peeve?", type: "text", placeholder: "Small things that annoy you..." },
+                    { id: "smallHappiness", label: "What's something ridiculously small that makes you happy?", type: "text", placeholder: "Fresh bedsheets, cute dogs..." },
+                    { id: "uselessTalent", label: "What's your most useless talent?", type: "text", placeholder: "Party tricks..." },
+                    { id: "romanEmpire", label: "What's your Roman Empire?", type: "text", placeholder: "That one topic you think about constantly..." },
+                    { id: "favoriteMeme", label: "What's your current favorite meme?", type: "text", placeholder: "Describe it..." },
+                    { id: "alwaysYesTo", label: "What's something you will ALWAYS say yes to?", type: "text", placeholder: "Boba, late-night drive..." },
+                    { id: "neverNoTo", label: "What's something you will NEVER say no to?", type: "text", placeholder: "Never..." },
+                    { id: "disappearedWeek", label: "If you disappeared for a week, where would you go?", type: "text", placeholder: "A cabin in the woods, Tokyo..." },
+                    { id: "masterSkill", label: "If you could instantly master one skill, what would it be?", type: "text", placeholder: "Piano, fluent in French, coding..." }
+                ]
+            },
+            {
+                id: 5,
+                title: "SECTION 05 — INSIDE YOUR HEAD 🌱",
+                subtitle: "Thoughtful reflections on feelings and inner workings.",
+                questions: [
+                    { id: "overthinkMost", label: "What do you overthink the most?", type: "textarea", placeholder: "Future plans, past conversations..." },
+                    { id: "feelUnderstood", label: "What makes you feel truly understood?", type: "textarea", placeholder: "When someone notices subtle things..." },
+                    { id: "feelAppreciated", label: "What makes you feel appreciated?", type: "textarea", placeholder: "Acts of service, kind notes..." },
+                    { id: "feelLoved", label: "What makes you feel loved?", type: "textarea", placeholder: "Feeling safe and cherished..." },
+                    { id: "instantlyCheersUp", label: "What instantly cheers you up?", type: "textarea", placeholder: "Good music, favorite snack..." },
+                    { id: "feelSafe", label: "What makes you feel safe?", type: "textarea", placeholder: "A certain person, familiar space..." },
+                    { id: "upsetPreference", label: "When you're upset, do you prefer comfort, advice, distraction, or space?", type: "text", placeholder: "Comfort, space..." },
+                    { id: "misunderstoodAboutYou", label: "What's something people often misunderstand about you?", type: "textarea", placeholder: "Quietness vs coldness, etc..." },
+                    { id: "wishAskedMore", label: "What's something you wish people asked you more?", type: "textarea", placeholder: "Questions you love answering..." },
+                    { id: "proudOf", label: "What's something you're proud of?", type: "textarea", placeholder: "Personal milestones..." },
+                    { id: "currentlyFiguringOut", label: "What's something you're currently figuring out?", type: "textarea", placeholder: "Life chapters, career direction..." },
+                    { id: "wishKnewAboutYou", label: "What's something you wish people knew about you?", type: "textarea", placeholder: "Deep inside your heart..." }
+                ]
+            },
+            {
+                id: 6,
+                title: "SECTION 06 — THE DEEP STUFF 💌",
+                subtitle: "Optional deeper reflections. Take your time.",
+                note: "Note: Completely optional. Feel free to skip any or all of these.",
+                questions: [
+                    { id: "memoryNeverForget", label: "What's a memory you'll never forget?", type: "textarea", placeholder: "A core memory..." },
+                    { id: "somethingChangedYou", label: "What's something that changed you?", type: "textarea", placeholder: "An event or realization..." },
+                    { id: "versionYouMiss", label: "What's a version of yourself you miss?", type: "textarea", placeholder: "Past eras..." },
+                    { id: "tellYoungerSelf", label: "What would you tell your younger self?", type: "textarea", placeholder: "Words of reassurance..." },
+                    { id: "afraidLosing", label: "What's something you're afraid of losing?", type: "textarea", placeholder: "People, peace of mind..." },
+                    { id: "lifeActuallyWant", label: "What kind of life do you actually want?", type: "textarea", placeholder: "Peaceful, creative, adventurous..." },
+                    { id: "happinessMeans", label: "What does happiness mean to you?", type: "textarea", placeholder: "Quiet mornings, being surrounded by love..." },
+                    { id: "quietlyWorkingToward", label: "What's something you're quietly working toward?", type: "textarea", placeholder: "Secret goals..." },
+                    { id: "neverSaidOutLoud", label: "What's something you've never really said out loud?", type: "textarea", placeholder: "Hidden thoughts..." },
+                    { id: "rememberAboutYou", label: "What do you want people to remember about you?", type: "textarea", placeholder: "Your kindness, laughter, warmth..." },
+                    { id: "friendshipMeans", label: "What does friendship mean to you?", type: "textarea", placeholder: "Mutual safety and growing together..." },
+                    { id: "hopeFutureSelf", label: "What do you hope your future self is like?", type: "textarea", placeholder: "At peace, fulfilled..." }
+                ]
+            },
+            {
+                id: 7,
+                title: "SECTION 07 — OUR FRIENDSHIP ♡",
+                subtitle: "Reflections specifically about us and our bond.",
+                questions: [
+                    { id: "ourFavMemory", label: "What's your favorite memory with me?", type: "textarea", placeholder: "A special moment we shared..." },
+                    { id: "appreciateAboutMe", label: "What's something about me that you appreciate?", type: "textarea", placeholder: "Things you love about my personality..." },
+                    { id: "inCommon", label: "What's something you think we have in common?", type: "textarea", placeholder: "Similar quirks or tastes..." },
+                    { id: "completelyDifferent", label: "What's something you think is completely different about us?", type: "textarea", placeholder: "Contrast between us..." },
+                    { id: "alwaysWantedToDo", label: "What's something you've always wanted to do together?", type: "textarea", placeholder: "Future adventures..." },
+                    { id: "iShouldKnow", label: "What's something you think I should know about you?", type: "textarea", placeholder: "A secret insight..." },
+                    { id: "doMoreOften", label: "Is there anything you want us to do more often?", type: "textarea", placeholder: "Hangouts, calls, texting..." },
+                    { id: "hopeNeverChanges", label: "What's one thing you hope never changes about our friendship?", type: "textarea", placeholder: "Our warmth and honesty..." }
+                ]
+            },
+            {
+                id: 8,
+                title: "SECTION 08 — JUST TELL ME ANYTHING 🪽",
+                subtitle: "Open floor for anything else on your mind.",
+                questions: [
+                    { id: "somethingRandom", label: "Tell me something random.", type: "textarea", placeholder: "A random fact or thought..." },
+                    { id: "somethingImportant", label: "Tell me something important.", type: "textarea", placeholder: "Something heavy or meaningful..." },
+                    { id: "neverBeenAsked", label: "Tell me something you've never been asked before.", type: "textarea", placeholder: "An untold story..." },
+                    { id: "anythingElse", label: "Tell me anything else you want me to know.", type: "textarea", placeholder: "Final thoughts, sweet notes..." }
+                ]
+            }
+        ];
+
+        let currentSectionIndex = 0;
+        let formData = {};
+
+        // Navigation Functions
+        function startQuestionnaire() {
+            document.getElementById('landingView').classList.add('hidden');
+            document.getElementById('questionnaireView').classList.remove('hidden');
+            renderCurrentSection();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderCurrentSection() {
+            const section = questionnaireSections[currentSectionIndex];
+            
+            // Update Header labels
+            document.getElementById('sectionIndicator').innerText = `SECTION 0${currentSectionIndex + 1} OF 08`;
+            document.getElementById('sectionTitle').innerText = section.title;
+            document.getElementById('progressText').innerText = `0${currentSectionIndex + 1} / 08`;
+
+            // Build form html
+            const container = document.getElementById('sectionContainer');
+            let html = `
+                <div class="mb-4">
+                    <p class="text-archive-muted font-serif italic text-base">${section.subtitle}</p>
+                    ${section.note ? `<p class="text-xs text-archive-sage mt-1 font-medium bg-archive-sage/10 p-2.5 rounded-xl border border-archive-sage/20">${section.note}</p>` : ''}
+                </div>
+                <div class="space-y-4">
+            `;
+
+            section.questions.forEach(q => {
+                const val = formData[q.id] || '';
+                html += `<div>
+                    <label class="block text-xs font-semibold text-archive-text mb-1.5">${q.label}${q.required ? ' <span class="text-red-400">*</span>' : ''}</label>
+                `;
+                if (q.type === 'textarea') {
+                    html += `<textarea id="q_${q.id}" oninput="saveField('${q.id}', this.value)" rows="3" placeholder="${q.placeholder || ''}" class="input-scrapbook">${val}</textarea>`;
+                } else {
+                    html += `<input type="text" id="q_${q.id}" oninput="saveField('${q.id}', this.value)" value="${val}" placeholder="${q.placeholder || ''}" class="input-scrapbook">`;
+                }
+                html += `</div>`;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+
+            // Update prev/next buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (currentSectionIndex === 0) {
+                prevBtn.classList.add('opacity-40', 'pointer-events-none');
+            } else {
+                prevBtn.classList.remove('opacity-40', 'pointer-events-none');
+            }
+
+            if (currentSectionIndex === questionnaireSections.length - 1) {
+                nextBtn.innerText = "keep my answers safe ♡";
+                nextBtn.setAttribute('onclick', 'submitQuestionnaire()');
+                nextBtn.className = "bg-archive-sage hover:bg-[#77965c] text-white px-8 py-3 rounded-full font-medium text-sm transition shadow-md flex items-center gap-2";
+            } else {
+                nextBtn.innerText = "Next Section →";
+                nextBtn.setAttribute('onclick', 'nextSection()');
+                nextBtn.className = "bg-archive-sage hover:bg-[#77965c] text-white px-8 py-3 rounded-full font-medium text-sm transition shadow-md flex items-center gap-2";
+            }
+        }
+
+        function saveField(id, value) {
+            formData[id] = value;
+        }
+
+        function nextSection() {
+            // Validate required fields on section 1 (name)
+            if (currentSectionIndex === 0) {
+                const nameVal = formData['name'];
+                if (!nameVal || nameVal.trim() === '') {
+                    alertBox("Please let me know what to call you before proceeding! ♡");
+                    document.getElementById('q_name').focus();
+                    return;
+                }
+            }
+
+            if (currentSectionIndex < questionnaireSections.length - 1) {
+                currentSectionIndex++;
+                renderCurrentSection();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevSection() {
+            if (currentSectionIndex > 0) {
+                currentSectionIndex--;
+                renderCurrentSection();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Custom custom alert box (replacing forbidden alert())
+        function alertBox(msg) {
+            const modal = document.createElement('div');
+            modal.className = "fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in";
+            modal.innerHTML = `
+                <div class="paper-card p-6 max-w-sm w-full text-center">
+                    <div class="text-2xl mb-2">💌</div>
+                    <p class="text-sm font-medium text-archive-text mb-4">${msg}</p>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-archive-sage text-white px-5 py-2 rounded-full text-xs font-medium">Okay ♡</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Submission & Storage Handling
+        async function submitQuestionnaire() {
+            const submission = {
+                id: 'sub_' + Date.now(),
+                submittedAt: new Date().toISOString(),
+                name: formData['name'] || 'Anonymous Friend',
+                nickname: formData['nicknames'] || formData['name'] || 'Friend',
+                data: formData
+            };
+
+            // Save locally
+            let allSubs = JSON.parse(localStorage.getItem('archive_submissions') || '[]');
+            allSubs.unshift(submission);
+            localStorage.setItem('archive_submissions', JSON.stringify(allSubs));
+
+            // Try Cloud Sync (JSONBin) if configured
+            const cloudConfig = JSON.parse(localStorage.getItem('archive_cloud_config') || '{}');
+            if (cloudConfig.key && cloudConfig.binId) {
+                try {
+                    await fetch(`https://api.jsonbin.io/v3/b/${cloudConfig.binId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': cloudConfig.key
+                        },
+                        body: JSON.stringify({ submissions: allSubs })
+                    });
+                } catch(e) {
+                    console.error("Cloud sync backup failed, saved locally", e);
+                }
+            }
+
+            // Show Success view
+            document.getElementById('questionnaireView').classList.add('hidden');
+            document.getElementById('successView').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        // ================= ADMIN DASHBOARD LOGIC =================
+        function openAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminPassword() {
+            const pwd = document.getElementById('adminPasswordInput').value;
+            const correctPwd = localStorage.getItem('archive_admin_pwd') || '1234';
+
+            if (pwd === correctPwd) {
+                closeAdminLoginModal();
+                document.getElementById('landingView').classList.add('hidden');
+                document.getElementById('questionnaireView').classList.add('hidden');
+                document.getElementById('successView').classList.add('hidden');
+                document.getElementById('adminDashboardView').classList.remove('hidden');
+                loadCloudConfigInputs();
+                renderSubmissionsList();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alertBox("Incorrect password. Default PIN is 1234.");
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminDashboardView').classList.add('hidden');
+            document.getElementById('landingView').classList.remove('hidden');
+            document.getElementById('adminPasswordInput').value = '';
+        }
+
+        function toggleCloudConfig() {
+            const panel = document.getElementById('cloudConfigPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function loadCloudConfigInputs() {
+            const config = JSON.parse(localStorage.getItem('archive_cloud_config') || '{}');
+            if (config.key) document.getElementById('jsonbinKeyInput').value = config.key;
+            if (config.binId) document.getElementById('jsonbinIdInput').value = config.binId;
+        }
+
+        function saveCloudConfig() {
+            const key = document.getElementById('jsonbinKeyInput').value.trim();
+            const binId = document.getElementById('jsonbinIdInput').value.trim();
+            localStorage.setItem('archive_cloud_config', JSON.stringify({ key, binId }));
+            alertBox("Cloud configuration saved successfully! ♡");
+            syncFromCloud();
+        }
+
+        async function syncFromCloud() {
+            const config = JSON.parse(localStorage.getItem('archive_cloud_config') || '{}');
+            if (!config.key || !config.binId) {
+                alertBox("Please enter JSONBin Key and Bin ID first.");
+                return;
+            }
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${config.binId}/latest`, {
+                    headers: { 'X-Master-Key': config.key }
+                });
+                const data = await res.json();
+                if (data && data.record && data.record.submissions) {
+                    localStorage.setItem('archive_submissions', JSON.stringify(data.record.submissions));
+                    renderSubmissionsList();
+                    alertBox("Synced successfully with cloud archive! ♡");
+                }
+            } catch(e) {
+                alertBox("Could not sync from cloud. Check your API credentials.");
+            }
+        }
+
+        function renderSubmissionsList() {
+            const container = document.getElementById('submissionsListContainer');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            let subs = JSON.parse(localStorage.getItem('archive_submissions') || '[]');
+
+            document.getElementById('totalSubmissionsCount').innerText = subs.length;
+
+            if (search) {
+                subs = subs.filter(s => 
+                    s.name.toLowerCase().includes(search) || 
+                    (s.nickname && s.nickname.toLowerCase().includes(search))
+                );
+            }
+
+            if (subs.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-archive-muted text-xs italic">
+                        No submissions found yet. Share your archive link with someone you love! ♡
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            subs.forEach(sub => {
+                const dateStr = new Date(sub.submittedAt).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+                html += `
+                    <div class="bg-archive-cream/50 border border-archive-border rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 transition hover:bg-archive-cream">
+                        <div>
+                            <h4 class="font-serif text-lg text-archive-text flex items-center gap-2">
+                                <span>${sub.name}</span>
+                                <span class="text-xs font-sans text-archive-muted bg-white px-2.5 py-0.5 rounded-full border border-archive-border">${sub.nickname || 'Friend'}</span>
+                            </h4>
+                            <p class="text-xs text-archive-muted">Submitted on ${dateStr}</p>
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                            <button onclick="viewResponse('${sub.id}')" class="bg-archive-sage hover:bg-[#77965c] text-white text-xs px-4 py-2 rounded-xl font-medium transition shadow-sm">
+                                Read Response
+                            </button>
+                            <button onclick="deleteResponse('${sub.id}')" class="bg-white hover:bg-archive-rose text-archive-muted hover:text-red-500 border border-archive-border text-xs px-3 py-2 rounded-xl transition">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function viewResponse(id) {
+            const subs = JSON.parse(localStorage.getItem('archive_submissions') || '[]');
+            const sub = subs.find(s => s.id === id);
+            if (!sub) return;
+
+            const modalContent = document.getElementById('responseModalContent');
+            const dateStr = new Date(sub.submittedAt).toLocaleDateString('en-US', {
+                month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+
+            let contentHTML = `
+                <div class="mb-6 pb-4 border-b border-archive-border">
+                    <span class="text-xs font-bold text-archive-sage uppercase tracking-wider">Archive Entry</span>
+                    <h3 class="text-3xl font-serif text-archive-text">${sub.name}'s Questionnaire</h3>
+                    <p class="text-xs text-archive-muted">Submitted: ${dateStr}</p>
+                </div>
+                <div class="space-y-6">
+            `;
+
+            questionnaireSections.forEach((sec, sIdx) => {
+                contentHTML += `
+                    <div class="bg-archive-cream/40 p-4 rounded-2xl border border-archive-border">
+                        <h4 class="font-serif text-lg text-archive-sage mb-3 pb-1 border-b border-archive-border/60">${sec.title}</h4>
+                        <div class="space-y-3">
+                `;
+                sec.questions.forEach(q => {
+                    const ans = sub.data[q.id];
+                    if (ans && ans.trim() !== '') {
+                        contentHTML += `
+                            <div>
+                                <div class="text-xs font-semibold text-archive-muted">${q.label}</div>
+                                <div class="text-sm text-archive-text font-medium mt-0.5 bg-white p-2.5 rounded-xl border border-archive-border/60">${escapeHtml(ans)}</div>
+                            </div>
+                        `;
+                    }
+                });
+                contentHTML += `</div></div>`;
+            });
+
+            contentHTML += `</div>`;
+            modalContent.innerHTML = contentHTML;
+            document.getElementById('responseModal').classList.remove('hidden');
+        }
+
+        function closeResponseModal() {
+            document.getElementById('responseModal').classList.add('hidden');
+        }
+
+        function deleteResponse(id) {
+            if (confirm("Are you sure you want to delete this response?")) {
+                let subs = JSON.parse(localStorage.getItem('archive_submissions') || '[]');
+                subs = subs.filter(s => s.id !== id);
+                localStorage.setItem('archive_submissions', JSON.stringify(subs));
+                renderSubmissionsList();
+            }
+        }
+
+        function exportJSON() {
+            const subs = localStorage.getItem('archive_submissions') || '[]';
+            const blob = new Blob([subs], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `let-me-know-you-archive-${Date.now()}.json`;
+            a.click();
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
