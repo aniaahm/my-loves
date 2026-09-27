@@ -638,24 +638,30 @@
         // 3. "KNOW ME TOO" MY ANSWERS DISPLAY LOGIC
         // ==========================================
         function toggleMyAnswers() {
-            const container = document.getElementById('myAnswersContainer');
-            container.classList.toggle('hidden');
+    const container = document.getElementById('myAnswersContainer');
+    container.classList.toggle('hidden');
 
-            const contentDiv = document.getElementById('myAnswersContent');
-            if (!contentDiv.innerHTML.trim()) {
-                let html = '';
-                for (const key in MY_ANSWERS) {
-                    html += `
-                        <div class="bg-archive-cream/50 p-3.5 rounded-2xl border border-archive-border">
-                            <span class="font-semibold uppercase tracking-wider text-archive-sage block mb-1">${key}</span>
-                            <p class="text-archive-text font-medium">${MY_ANSWERS[key]}</p>
-                        </div>
-                    `;
-                }
-                contentDiv.innerHTML = html;
+    const contentDiv = document.getElementById('myAnswersContent');
+    if (!contentDiv.innerHTML.trim()) {
+        let html = '';
+        for (const key in MY_ANSWERS) {
+            if (key === 'aniaLore') {
+                // Directly insert the rich HTML lore block
+                html += MY_ANSWERS[key];
+            } else {
+                // Render regular text fields neatly
+                html += `
+                    <div class="bg-archive-cream/50 p-3.5 rounded-2xl border border-archive-border">
+                        <span class="font-semibold uppercase tracking-wider text-archive-sage block mb-1">${key}</span>
+                        <p class="text-archive-text font-medium">${MY_ANSWERS[key]}</p>
+                    </div>
+                `;
             }
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
+        contentDiv.innerHTML = html;
+    }
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
     </script>
 </body>
 </html>
